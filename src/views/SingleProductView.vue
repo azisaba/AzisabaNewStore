@@ -6,12 +6,12 @@ import {addToCart, API_ROOT} from "../util.ts";
 const route = useRoute()
 
 const products: Ref<Array<SaraProduct>> = ref([])
-const id = ref(parseInt(route.params.id))
+const id = ref(parseInt(route.params.id as string))
 
 watch(
     () => route.params.id,
     (newId) => {
-      id.value = parseInt(newId)
+      id.value = parseInt(newId as string)
     }
 )
 
@@ -29,12 +29,12 @@ fetch(API_ROOT + '/store/products').then(res => res.json()).then(response => {
   </v-container>
   <v-container v-else>
     <v-card>
-      <v-img :src="products.find(e => e.id === id).image_url" height="300px" width="300px"></v-img>
-      <v-card-title>{{ products.find(e => e.id === id).name }}</v-card-title>
-      <v-card-text>{{ products.find(e => e.id === id).description }}</v-card-text>
+      <v-img :src="products.find(e => e.id === id)!.image_url" height="300px" width="300px"></v-img>
+      <v-card-title>{{ products.find(e => e.id === id)!.name }}</v-card-title>
+      <v-card-text>{{ products.find(e => e.id === id)!.description }}</v-card-text>
       <v-card-actions>
-        <v-btn @click="addToCart(products.find(e => e.id === id))" color="orange">カートに入れる</v-btn>
-        <b>{{ products.find(e => e.id === id).price }}円</b>
+        <v-btn @click="addToCart(products.find(e => e.id === id)!)" color="orange">カートに入れる</v-btn>
+        <b>{{ products.find(e => e.id === id)!.price }}円</b>
       </v-card-actions>
     </v-card>
   </v-container>

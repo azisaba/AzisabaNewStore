@@ -14,5 +14,6 @@ type SaraProduct = {
     description: string;
     price: number;
     image_url: string;
+    tags?: undefined;
     hidden: boolean;
 }
