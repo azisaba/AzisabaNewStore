@@ -4,7 +4,7 @@ type Product = {
     description: string;
     price: number;
     image_url: string;
-    tags: string[];
+    tags: string;
     hidden: boolean;
 }
 

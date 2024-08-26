@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import {Ref, ref, watch} from "vue";
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import {addToCart, API_ROOT} from "../util.ts";
 
+const router = useRouter()
 const route = useRoute()
 
 const saraProducts: Ref<Array<SaraProduct>> = ref([])
@@ -26,6 +27,7 @@ fetch(`${API_ROOT}/store/players/${localStorage.getItem('minecraftId')}/highest_
 
 const addItemToCart = (product: SaraProduct) => {
   addToCart({...product, price: product.price - highestSara.value})
+  router.push('/cart')
 }
 </script>
 

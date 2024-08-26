@@ -1,4 +1,5 @@
-export const API_ROOT = "https://api-ktor.azisaba.net"
+export const API_ROOT = "http://localhost:8080"
+//export const API_ROOT = "https://api-ktor.azisaba.net"
 
 export const addToCart = (product: Product | SaraProduct) => {
     if (!product) {
