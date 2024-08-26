@@ -12,7 +12,7 @@ const selectedTags = ref<string[]>([])
 fetch(API_ROOT + '/store/products').then(res => res.json()).then(response => {
   products.value = response['products']
   saraProducts.value = response['sara_products']
-  allTags.value = Array.from(new Set(response['products'].map(e => e.tags).join(' ').split(' ')))
+  allTags.value = Array.from(new Set(products.value.map(e => e.tags).join(' ').split(' ')))
 })
 
 fetch(`${API_ROOT}/store/players/${minecraftId}/highest_sara`)
@@ -40,6 +40,7 @@ fetch(`${API_ROOT}/store/players/${minecraftId}/highest_sara`)
       clearable
       multiple
   >
+    <!-- @vue-ignore -->
     <template v-slot:selection="{ attrs, item, select, selected }">
       <v-chip
           v-bind="attrs"
