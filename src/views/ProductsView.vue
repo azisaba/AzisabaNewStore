@@ -54,18 +54,26 @@ fetch(`${API_ROOT}/store/players/${minecraftId}/highest_sara`)
   </v-combobox>
   <div class="d-flex flex-wrap justify-center">
     <template v-for="product in products" :key="product.id">
-      <v-card class="margin-10px" v-if="selectedTags.length === 0 || product.tags.split(' ').find(tag => selectedTags.indexOf(tag) !== -1)">
-        <router-link style="color: inherit;" :to="'/products/' + product.id">
-          <v-img :src="product.image_url" height="300px" width="300px" style="align-self: center;"></v-img>
+      <v-card
+          v-if="selectedTags.length === 0 || product.tags.split(' ').find(tag => selectedTags.indexOf(tag) !== -1)"
+          class="margin-10px fixed-width-360"
+      >
+        <router-link style="color: inherit;" :to="'/products/' + product.id" class="d-flex flex-column">
+          <v-img :src="product.image_url" height="360px" width="360px" style="align-self: center;"></v-img>
           <v-card-title>{{ product.name }}</v-card-title>
           <v-card-subtitle>タグ: <v-chip v-for="tag in product.tags.split(' ')" :key="tag">{{ tag }}</v-chip></v-card-subtitle>
           <v-card-text>{{ product.price }}円</v-card-text>
         </router-link>
       </v-card>
     </template>
-    <v-card v-if="selectedTags.length === 0 || selectedTags.indexOf('ランク') !== -1" v-for="product in saraProducts" :key="product.id" class="margin-10px">
+    <v-card
+        v-if="selectedTags.length === 0 || selectedTags.indexOf('ランク') !== -1"
+        v-for="product in saraProducts"
+        :key="product.id"
+        class="margin-10px fixed-width-360"
+    >
       <router-link style="color: inherit;" :to="'/sara_products/' + product.id">
-        <v-img :src="product.image_url" height="300px" width="300px" style="align-self: center;"></v-img>
+        <v-img :src="product.image_url" height="360px" width="360px" style="align-self: center;"></v-img>
         <v-card-title>{{ product.name }}</v-card-title>
         <v-card-subtitle>タグ: <v-chip>ランク</v-chip></v-card-subtitle>
         <v-card-text v-if="product.price - highestSara > 0">{{ product.price - highestSara }}円</v-card-text>
@@ -78,5 +86,9 @@ fetch(`${API_ROOT}/store/players/${minecraftId}/highest_sara`)
 <style scoped>
 .margin-10px {
   margin: 10px;
+}
+
+.fixed-width-360 {
+  width: 360px;
 }
 </style>
